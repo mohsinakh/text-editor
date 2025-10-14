@@ -149,7 +149,7 @@ If you find this project interesting, check out more of my work in **AI**, **Web
 
 **Mohsin Abbas Khan**  
 🌐 [Portfolio](https://mohsinabbas.site/)  
-💼 [LinkedIn](https://linkedin.com/in/mohsinabbaskhan)  
+💼 [LinkedIn](https://www.linkedin.com/in/mohsin-abbas-7252b126b/)  
 🧑‍💻 [GitHub](https://github.com/mohsinakh)
 
 ---
