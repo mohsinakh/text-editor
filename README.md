@@ -6,18 +6,59 @@ This project is a **terminal-based text editor** written completely from scratch
 
 ---
 
-## 🚀 Current Progress — Day 1: Foundation Setup
+## Day 1: Foundation Setup 
+The current version is the minimal core of a working terminal editor: 
+- 🧩 Built using **Python’s curses** library
+- ⌨️ Supports **typing, backspace, Enter, and arrow-key navigation**
+- 📍 Tracks **cursor position** manually
+- 🪶 Stores text as a **list of strings**, one per line
+- 🖥️ Redraws the screen on every input event.
 
-The current version is the minimal core of a working terminal editor:
+Every keystroke updates a live buffer — nothing is handled automatically. It’s pure logic, text manipulation, and terminal control — a perfect foundation for deep DSA exploration.
 
-- 🧩 Built using **Python’s `curses`** library  
-- ⌨️ Supports **typing, backspace, Enter, and arrow-key navigation**  
-- 📍 Tracks **cursor position** manually  
-- 🪶 Stores text as a **list of strings**, one per line  
-- 🖥️ Redraws the screen on every input event  
+## 🚀 Current Progress — Day 2: Undo/Redo Implemented
 
-Every keystroke updates a live buffer — nothing is handled automatically.  
-It’s pure logic, text manipulation, and terminal control — a perfect foundation for deep DSA exploration.
+Today’s milestone adds a **fully functional Undo/Redo system** to the terminal editor:
+
+- 🔄 Implemented **Undo/Redo** using **two stacks** (`undo_stack` and `redo_stack`)  
+- 💾 Each state stores a **deep copy of the text buffer** along with **cursor positions**  
+- ⌨️ Works for **insertions, deletions, new lines**, and cursor movement  
+- 🧠 Reinforces **DSA concepts** in a practical project — seeing stacks in action for the first time in a real editor  
+
+This makes the editor feel much more like a **real-world text editor**, and every keypress is now safely reversible.
+
+---
+
+## ⚙️ How to Run Locally (Windows + macOS/Linux)
+
+### macOS / Linux
+```bash
+git clone https://github.com/mohsinakh/text-editor.git
+cd text-editor
+python3 main.py
+```
+
+### Windows
+
+```powershell
+git clone https://github.com/mohsinakh/text-editor.git
+cd text-editor
+python main.py
+```
+> **Note:** On Windows, you may need to install `windows-curses` first:
+
+```powershell
+pip install windows-curses
+```
+
+---
+
+
+## 💻 Demo Preview (Terminal View)
+
+Here’s a quick ASCII example of typing, cursor movement, and undo/redo:
+
+
 
 ---
 
@@ -72,45 +113,40 @@ Here’s the challenge breakdown:
 |  File I/O Layer       |
 |  (Save / Open Files)  |
 +-----------------------+
-
 ```
-## ⚙️ How to Run Locally
 
-```bash
-git clone https://github.com/mohsinakh/text-editor.git
-cd text-editor
-python3 main.py
-```
 ## ✅ Controls
 
-| Key | Action |
-|-----|---------|
-| **Type** | Insert text |
-| **Enter** | New line |
-| **Backspace** | Delete character |
-| **Arrow Keys** | Move cursor |
-| **ESC** | Exit editor |
+| Key          | Action                    |
+|--------------|---------------------------|
+| **Type**     | Insert text               |
+| **Enter**    | New line                  |
+| **Backspace**| Delete character          |
+| **Arrow Keys** | Move cursor             |
+| **ESC**      | Exit editor               |
+| **CTRL+U**   | Undo                      |
+| **CTRL+R**   | Redo                      |
 
 ---
 
 ## 🧩 Next Milestones
 
 ### 🧠 Phase 1 — DSA Foundations
-- Implement **Undo/Redo** using **two stacks**
-- Introduce **Rope Tree** for efficient text storage and mutation
-- Add **Search/Replace** using the **KMP algorithm**
+- Introduce **Gap Buffer** for efficient text storage and mutation  
+- Rebuild **Undo/Redo** using operation-based stacks for memory efficiency  
+- Add **Search/Replace** using the **KMP algorithm**  
 
 ### 💾 Phase 2 — File Management
-- Implement **file open**, **save**, and **autosave**
-- Maintain **persistent state** across sessions
+- Implement **file open**, **save**, and **autosave**  
+- Maintain **persistent state** across sessions  
 
 ### 🪟 Phase 3 — GUI Version
-- Transition to **PySide6 (Qt for Python)** for a modern desktop interface
-- Add **text styling**, **syntax highlighting**, and **undo history visualization**
+- Transition to **PySide6 (Qt for Python)** for a modern desktop interface  
+- Add **text styling**, **syntax highlighting**, and **undo history visualization**  
 
 ### 🤖 Phase 4 — AI Enhancements
-- Integrate **AI-powered autocorrect** and **smart suggestions**
-- Use **Hugging Face API** or a **local model** for text prediction and completion
+- Integrate **AI-powered autocorrect** and smart suggestions  
+- Use **Hugging Face API** or a local model for text prediction and completion
 
 ---
 
