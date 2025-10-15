@@ -205,7 +205,7 @@ If you'd like to:
 - Add an **AI layer** for autocorrect or suggestions  
 - Build the **GUI version**  
 
-→ Fork the repo, open a **PR**, or drop me a message on [LinkedIn](https://linkedin.com/in/mohsinabbaskhan).
+→ Fork the repo, open a **PR**, or drop me a message on [LinkedIn](https://www.linkedin.com/in/mohsin-abbas-7252b126b/).
 
 ---
 
