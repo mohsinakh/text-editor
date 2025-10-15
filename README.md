@@ -58,6 +58,12 @@ pip install windows-curses
 
 Here’s a quick ASCII example of typing, cursor movement, and undo/redo:
 
+![Terminal Editor Demo](screenshots/editor-demo.png)
+
+### Code Preview:
+
+![Code Preview](screenshots/code-demo.png)
+
 
 
 ---
