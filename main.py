@@ -1,4 +1,7 @@
 import curses
+import copy
+
+
 
 def main(stdscr):
     curses.curs_set(1)
@@ -7,19 +10,52 @@ def main(stdscr):
 
     text = [""]
     row, col = 0, 0
+    undo_stack,redo_stack = [],[]
+
+    def save_state():
+        """Save text and cursor position to undo stack."""
+        undo_stack.append((copy.deepcopy(text), row, col))
+        redo_stack.clear()  # clear redo stack after new edit
+
+    def undo():
+        nonlocal text, col, row
+        if undo_stack:
+            redo_stack.append((copy.deepcopy(text), row, col))
+            snapshot, saved_row, saved_col = undo_stack.pop()
+            text[:] = snapshot
+            row, col = saved_row, saved_col
+
+    def redo():
+        nonlocal text, col, row
+        if redo_stack:
+            undo_stack.append((copy.deepcopy(text), row, col))
+            snapshot, saved_row, saved_col = redo_stack.pop()
+            text[:] = snapshot
+            row, col = saved_row, saved_col
+
+
 
     while True:
         key = stdscr.getch()
+
+
+        if key==21:
+            undo()   #CTRL + U = undo
+
+        if key==18:
+            redo()   #CTRL + R = redo
 
         if key == 27:  # ESC to quit
             break
 
         elif key in (10, 13):  # Enter key
+            save_state()
             text.insert(row + 1, "")
             row += 1
             col = 0
 
         elif key in (curses.KEY_BACKSPACE, 127):
+            save_state()
             if col > 0:
                 text[row] = text[row][:col-1] + text[row][col:]
                 col -= 1
@@ -42,6 +78,7 @@ def main(stdscr):
             col = min(col, len(text[row]))
 
         elif 32 <= key <= 126:  # Printable ASCII
+            save_state()
             ch = chr(key)
             text[row] = text[row][:col] + ch + text[row][col:]
             col += 1
