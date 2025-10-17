@@ -16,7 +16,7 @@ The current version is the minimal core of a working terminal editor:
 
 Every keystroke updates a live buffer — nothing is handled automatically. It’s pure logic, text manipulation, and terminal control — a perfect foundation for deep DSA exploration.
 
-## 🚀 Current Progress — Day 2: Undo/Redo Implemented
+## Day 2: Undo/Redo Implemented
 
 Today’s milestone adds a **fully functional Undo/Redo system** to the terminal editor:
 
@@ -25,7 +25,32 @@ Today’s milestone adds a **fully functional Undo/Redo system** to the terminal
 - ⌨️ Works for **insertions, deletions, new lines**, and cursor movement  
 - 🧠 Reinforces **DSA concepts** in a practical project — seeing stacks in action for the first time in a real editor  
 
-This makes the editor feel much more like a **real-world text editor**, and every keypress is now safely reversible.
+
+## 🚀 Current Progress — Day 3: Gap Buffer & Cursor-Aware Editing
+
+Today’s milestone improves **multi-word line handling**, **Enter key behavior**, and **cursor-aware backspace**:
+
+- 📜 **Gap Buffer per line**
+  - Each line now uses a **GapBuffer** to track text and cursor internally
+  - Enables **inserting, deleting, and splitting text at any cursor position**
+  - Works correctly for **multi-word lines with spaces**
+
+- ⌨️ **Enter key behavior**
+  - Splits the current line at the **cursor position**
+  - Text after the cursor moves to the **new line**
+  - Cursor in the new line starts at **position 0** or synced with GapBuffer
+
+- ⌫ **Backspace at cursor**
+  - Deletes character at the **current cursor**, not just at the end
+  - Supports **merging lines** if backspacing at the start of a line
+
+- 🔄 **Undo/Redo improvements**
+  - Cursor position now **syncs with GapBuffer** after undo/redo
+  - Works for **insertions, deletions, new lines, and cursor moves**
+
+This makes the editor behave more like a **real-world text editor**, with correct line splitting and cursor-aware editing — the foundation for advanced text manipulation and DSA exploration.
+
+
 
 ---
 
@@ -98,7 +123,7 @@ Here’s the challenge breakdown:
            v
 +-----------------------+
 |  Text Buffer          |
-|  (List / Rope / Gap)  |
+|  (List of Gap Buffers)  |
 +----------+------------+
            |
            v

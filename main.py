@@ -62,41 +62,44 @@ def main(stdscr):
             text[row] = before_buf
             text.insert(row + 1, after_buf)
             row += 1
-            col = 0
+            col = text[row].cursor  # <- sync with cursor in new line
 
         elif key in (curses.KEY_BACKSPACE, 127):
             save_state()
             if col > 0:
-                # Normal character deletion
                 text[row].backspace()
                 col -= 1
             elif row > 0:
-                # Merge with previous line if at start of line
+                # merge with previous line
                 prev_len = len(text[row - 1])
-                text[row - 1] = GapBuffer(text[row - 1].get_text() + text[row].get_text())
+                new_text = text[row - 1].get_text() + text[row].get_text()
+                text[row - 1] = GapBuffer(new_text)
                 del text[row]
                 row -= 1
-                col = prev_len
+                col = 0
+                # sync cursor
+                text[row].cursor = col
 
 
         elif key == curses.KEY_LEFT:
             text[row].move_left()
-            col = max(0, col - 1)
-
+            col = text[row].cursor
 
         elif key == curses.KEY_RIGHT:
             text[row].move_right()
-            col = min(len(text[row]), col + 1)
+            col = text[row].cursor
 
 
         elif key == curses.KEY_UP:
             row = max(0, row - 1)
             col = min(col, len(text[row]))
+            text[row].cursor = col
 
 
         elif key == curses.KEY_DOWN:
             row = min(len(text) - 1, row + 1)
             col = min(col, len(text[row]))
+            text[row].cursor = col
 
 
         elif 32 <= key <= 126:
