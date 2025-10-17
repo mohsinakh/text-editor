@@ -87,7 +87,7 @@ Here’s a quick ASCII example of typing, cursor movement, and undo/redo:
 
 ### Code Preview:
 
-![Code Preview](screenshots/code-demo.png)
+![Code Preview](screenshots/editor-demo.png)
 
 
 
