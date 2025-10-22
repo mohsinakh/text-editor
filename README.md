@@ -26,7 +26,7 @@ Today’s milestone adds a **fully functional Undo/Redo system** to the terminal
 - 🧠 Reinforces **DSA concepts** in a practical project — seeing stacks in action for the first time in a real editor  
 
 
-## 🚀 Current Progress — Day 3: Gap Buffer & Cursor-Aware Editing
+## Day 3: Gap Buffer & Cursor-Aware Editing
 
 Today’s milestone improves **multi-word line handling**, **Enter key behavior**, and **cursor-aware backspace**:
 
@@ -47,6 +47,42 @@ Today’s milestone improves **multi-word line handling**, **Enter key behavior*
 - 🔄 **Undo/Redo improvements**
   - Cursor position now **syncs with GapBuffer** after undo/redo
   - Works for **insertions, deletions, new lines, and cursor moves**
+
+
+## 🚀 Current Progress — Day 4: Persistent Rope Tree Implementation
+
+Today marks a **major data-structure milestone** — the editor now uses a **Persistent Rope Tree** for storing and editing text efficiently and immutably.
+
+### 🪶 What Changed
+
+- 🧵 Replaced the old `GapBuffer` line structure with a **Persistent Rope Tree**  
+- ⚡ Each edit (insert/delete/split) now creates a **new version of the rope**, preserving history  
+- 💡 Enables **memory-efficient Undo/Redo**, since old versions share unmodified tree nodes  
+- 🧩 Rope nodes store:
+  - `left`, `right`, and `data` fields
+  - `weight` (character count in left subtree)
+  - Recursive operations for **split**, **concat**, **insert**, and **delete**
+
+### ⚙️ Editor-Level Improvements
+
+- 🧠 Undo/Redo rebuilt to leverage **rope persistence** — instant structural rollback  
+- ⌨️ Backspace, Enter, and character insertion now all run through **immutable Rope ops**
+- 🧾 Each line in the editor is a separate Rope instance, allowing multi-line editing  
+- 🧩 Efficient concatenation and splitting of large text blocks  
+
+### 💡 Why Rope Tree?
+
+Unlike normal strings or gap buffers:
+- ✅ **Insertions/Deletions are O(log n)** instead of O(n)
+- ✅ **Undo/Redo is structural (persistent)** — no deep copying
+- ✅ **Memory is shared efficiently** between versions
+
+This upgrade transitions the editor from *basic buffer editing* into a true **data-structure-backed text system**, similar to how **Sublime Text** or **VS Code** internally manage document history.
+
+---
+
+🧩 *Next up:* Persistent file saves and diff-based incremental rendering.
+
 
 This makes the editor behave more like a **real-world text editor**, with correct line splitting and cursor-aware editing — the foundation for advanced text manipulation and DSA exploration.
 
@@ -87,7 +123,7 @@ Here’s a quick ASCII example of typing, cursor movement, and undo/redo:
 
 ### Code Preview:
 
-![Code Preview](screenshots/editor-demo.png)
+![Code Preview](screenshots/code-demo.png)
 
 
 
