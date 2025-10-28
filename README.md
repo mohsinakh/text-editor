@@ -79,7 +79,7 @@ Unlike normal strings or gap buffers:
 
 This upgrade transitions the editor from *basic buffer editing* into a true **data-structure-backed text system**, similar to how **Sublime Text** or **VS Code** internally manage document history.
 
----
+--
 
 🧩 *Next up:* Persistent file saves and diff-based incremental rendering.
 
@@ -87,6 +87,40 @@ This upgrade transitions the editor from *basic buffer editing* into a true **da
 This makes the editor behave more like a **real-world text editor**, with correct line splitting and cursor-aware editing — the foundation for advanced text manipulation and DSA exploration.
 
 
+---
+
+## 🚀 Current Progress — Day 5: Rebalancing & Small-Leaf Optimization
+
+Today’s update focuses on **runtime efficiency** and **memory locality** — introducing automatic **rope rebalancing** and a **small-leaf in-place optimization** for smoother text operations.
+
+### ⚙️ What Changed
+
+- 🔁 **Periodic Rope Rebalancer**
+  - Added a `REBALANCE_THRESHOLD` counter that rebalances all ropes every few hundred edits
+  - Prevents performance degradation and tree skewing during long sessions
+  - Ensures average-case **O(log n)** access even after thousands of inserts/deletes  
+
+- 🧩 **Small-Leaf Optimization**
+  - Each leaf node under **64 characters** can now be **mutated directly** without splitting
+  - Greatly improves typing responsiveness and reduces tree growth
+  - Mimics real-world editor buffer strategies like *Vim’s small block allocator*
+
+- 🧠 **Undo/Redo Structural References**
+  - Undo/Redo now store **node references**, not deep copies
+  - Structural persistence ensures instant rollbacks without memory bloat
+
+### 🧾 Editor-Level Improvements
+
+- ⚡ Faster character insertions and deletions  
+- 🪶 Smoother typing experience with less frequent tree rebuilds  
+- 🧱 Log-based rebalancing helps detect edit hotspots in logs (`editor.log`)  
+- 🧩 Foundation laid for **diff-based rendering** and **persistent saves**  
+
+---
+
+🧩 *Next up:* Incremental rendering (diff-based screen updates) and persistent file save/load.
+
+This phase transforms the editor from a structural demo into a **performance-oriented engine**, capable of handling long documents efficiently — all in pure Python.
 
 ---
 
@@ -123,7 +157,7 @@ Here’s a quick ASCII example of typing, cursor movement, and undo/redo:
 
 ### Code Preview:
 
-![Code Preview](screenshots/code-demo.png)
+![Code Preview](screenshots/editor-demo.png)
 
 
 
