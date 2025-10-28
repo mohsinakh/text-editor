@@ -49,7 +49,7 @@ Today’s milestone improves **multi-word line handling**, **Enter key behavior*
   - Works for **insertions, deletions, new lines, and cursor moves**
 
 
-## 🚀 Current Progress — Day 4: Persistent Rope Tree Implementation
+## Day 4: Persistent Rope Tree Implementation
 
 Today marks a **major data-structure milestone** — the editor now uses a **Persistent Rope Tree** for storing and editing text efficiently and immutably.
 
