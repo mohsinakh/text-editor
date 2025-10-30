@@ -49,7 +49,7 @@ Today’s milestone improves **multi-word line handling**, **Enter key behavior*
   - Works for **insertions, deletions, new lines, and cursor moves**
 
 
-## Day 4: Persistent Rope Tree Implementation
+##  Day 4: Persistent Rope Tree Implementation
 
 Today marks a **major data-structure milestone** — the editor now uses a **Persistent Rope Tree** for storing and editing text efficiently and immutably.
 
@@ -89,7 +89,7 @@ This makes the editor behave more like a **real-world text editor**, with correc
 
 ---
 
-## 🚀 Current Progress — Day 5: Rebalancing & Small-Leaf Optimization
+##  Day 5: Rebalancing & Small-Leaf Optimization
 
 Today’s update focuses on **runtime efficiency** and **memory locality** — introducing automatic **rope rebalancing** and a **small-leaf in-place optimization** for smoother text operations.
 
@@ -118,9 +118,92 @@ Today’s update focuses on **runtime efficiency** and **memory locality** — i
 
 ---
 
-🧩 *Next up:* Incremental rendering (diff-based screen updates) and persistent file save/load.
+## 🚀 Current Progress — Day 6: Smooth Scrolling + Editor Shortcuts + Modular Architecture
 
-This phase transforms the editor from a structural demo into a **performance-oriented engine**, capable of handling long documents efficiently — all in pure Python.
+Today's goal was to begin transforming the editor into a **usable text-editing environment**, not just a DSA sandbox. This update focuses on **editor UX, file operations, and modularity.**
+
+---
+
+### ✅ What’s New
+
+---
+
+### 🧭 Smooth Scrolling Engine
+
+- View window now scrolls **independently of the cursor**
+- Cursor can move beyond visible region → screen scrolls smoothly
+- Allows editing files **larger than terminal height**
+- Easier navigation in long buffers  
+- Rendering only visible text = foundation for **diff-based rendering**
+
+---
+
+### ⌨️ Productivity Shortcuts (Terminal-Style)
+
+| Shortcut | Action |
+|---|---|
+| **Ctrl + S** | Save file |
+| **Ctrl + O** | Open file |
+| **Ctrl + Q** | Quit editor |
+| **Ctrl + U** | Undo |
+| **Ctrl + R** | Redo |
+
+> Copy/Paste & word-jump shortcuts are being scaffolded (next phase)  
+> Note: `curses` modifier handling varies across terminals, so special key capturing logic added.
+
+---
+
+### 🗂️ Filesystem Integration
+
+- Working **file open/save** using `FileManager`
+- **Prompt-based** filename input in terminal
+- Buffer loads into rope & cursor resets safely
+
+---
+
+### 🏗️ Major Refactor: Modular Architecture
+
+Editor split into clean modules:
+
+editor/
+├── buffer.py # Rope + cursor logic
+├── renderer.py # Screen drawing + smooth scroll
+├── input_handler.py # Key-bindings & command mapping
+├── file_manager.py # Open/save handling
+└── editor.py # Editor loop orchestrator
+main.py
+
+
+**Advantages**
+- Cleaner editor core  
+- Reusable Rope text engine  
+- Ready for **GUI port (Qt / PySide)**  
+- Real-world modular architecture (no monolithic script)
+
+---
+
+### 🧠 DSA Principles Reinforced
+
+- ✅ Full **Rope persistence** remains
+- ✅ **No deep copies** for undo/redo
+- ✅ Efficient large text editing
+- ✅ Windowed rendering (not full screen redraw every time)
+
+---
+
+### 🎯 Why This Matters
+
+Transition from **DSA playground → real TUI editor**:
+
+| Old Stage | New Stage |
+|---|---|
+| Minimal buffer & cursor | Modular editor architecture |
+| Global repaint | View-port rendering & scrolling |
+| Basic keystrokes | Terminal shortcuts & file I/O |
+| Learning playground | Nano/Vim-style emerging editor |
+
+This sets up the next leap: **smooth navigation, copy/paste, word jumps, search mode**.
+
 
 ---
 

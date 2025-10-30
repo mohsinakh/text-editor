@@ -1,4 +1,4 @@
-from gap_buffer import GapBuffer
+from editor.gap_buffer import GapBuffer
 
 buf = GapBuffer("Hello")
 print("Start:", buf.get_text())
