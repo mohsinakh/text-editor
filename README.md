@@ -9,7 +9,8 @@ It started life as a `list[str]` and a hand-tracked cursor. It now runs on a **p
 > _"The best way to master a data structure is to build something that genuinely needs it."_
 
 <!-- Add a terminal GIF here — it's worth it for a TUI project. Record with asciinema or a screen capture and drop it in screenshots/. -->
-<!-- ![demo](screenshots/demo.gif) -->
+![demo](screenshots/editor-demo.png)
+![demo](screenshots/code-demo.png)
 
 ## What it does
 
